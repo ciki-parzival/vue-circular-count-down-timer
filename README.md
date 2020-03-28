@@ -144,3 +144,45 @@ methods: {
     }
 }
 ````
+
+#### 6. Restart the timer
+
+````
+<circular-count-down-timer
+    ...
+    :show-negatives="true"
+    :notify-every="'second'"
+    :paused="pause"
+    @update="updated"
+    ref="countdown"
+></circular-count-down-timer>
+
+<button @click="setTime(15)">
+    Restart - 15 sec
+</button>
+
+...
+  data () {
+    return {
+      statusSeconds: -1,
+      pause: false
+    }
+  },
+
+methods: {
+    setTime: function (seconds) {
+      this.$refs.countdown.updateTime(seconds - this.statusSeconds)
+      this.pause = false
+    },
+    updated: function (status) {
+      if (status.value === 0) {
+        this.pause = true
+      } else {
+        this.pause = false
+      }
+      this.statusSeconds = status.value
+    }
+}
+
+````
+

@@ -324,8 +324,7 @@
                 this.$emit('update', output);
             },
             updateTime(seconds){
-                if(this.value)
-                    this.value+=seconds;
+                this.value+=seconds;
                 if(this.value<0){
                     this.$emit('finish')
                 }
